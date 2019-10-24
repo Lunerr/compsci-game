@@ -1,4 +1,6 @@
-package game;
+package Structures;
+
+import Utility.Utility;
 
 public class Player {
    public static int health = 100;

@@ -1,6 +1,9 @@
-package game;
+package Actions;
 
 import java.util.Scanner;
+
+import Structures.Player;
+import Utility.Utility;
 
 public class Fight {
    @SuppressWarnings("resource")

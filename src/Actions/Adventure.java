@@ -1,4 +1,7 @@
-package game;
+package Actions;
+
+import Structures.Monster;
+import Utility.Utility;
 
 public class Adventure {
    public static void explore() {

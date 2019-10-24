@@ -1,4 +1,6 @@
-package game;
+package Structures;
+
+import Utility.Utility;
 
 public class Monster {
    public int health = Utility.nextInt(30, 500);

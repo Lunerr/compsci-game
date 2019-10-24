@@ -1,6 +1,10 @@
-package game;
+package Main;
 
 import java.util.Scanner;
+
+import Actions.Adventure;
+import Actions.Bag;
+import Structures.Player;
 
 public class Game {
    @SuppressWarnings("resource")
