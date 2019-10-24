@@ -1,18 +1,48 @@
 package Structures;
 
-import Utility.Utility;
-
 public class Player {
-   public static int health = 100;
-   public static int strength = Utility.nextInt(15, 30);
-   public static int dexterity = 1;
-   public static int accuracy = 35;
+   private int health;
+   private int strength;
+   private int dexterity;
+   private int accuracy;
    
-   public static int modifyHealth(int healthLost) {
-      int newHealth = health - healthLost;
-      
-      health = newHealth;
-      
+   public void setHealth(int health) {
+      this.health = health;
+   }
+   
+   public void setStrength(int strength) {
+      this.strength = strength;
+   }
+   
+   public void setDexterity(int dexterity) {
+      this.dexterity = dexterity;
+   }
+   
+   public void setAccuracy(int accuracy) {
+      this.accuracy = accuracy;
+   }
+   
+   public int getHealth() {
       return health;
+   }
+   
+   public int getStrength() {
+      return strength;
+   }
+   
+   public int getDexterity() {
+      return dexterity;
+   }
+   
+   public int getAccuracy() {
+      return accuracy;
+   }
+   
+   public int modifyHealth(int healthLost) {
+      int newHealth = this.getHealth() - healthLost;
+      
+      this.setHealth(newHealth);
+      
+      return this.getHealth();
    }
 }

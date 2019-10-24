@@ -1,11 +1,11 @@
 package Actions;
 
 import Structures.Monster;
-import Utility.Utility;
+import Structures.Player;
 
 public class Adventure {
-   public static void explore() {
-      int roll = Utility.roll();
+   public void explore(Player player) {
+      int roll = Utility.Random.roll();
       
       if (roll >= 75) {
          Monster monster = new Monster();
@@ -13,7 +13,7 @@ public class Adventure {
          System.out.println("You've found a monster!\nHealth: " + monster.health +
                "\tDamage: " + monster.damage + "\tAccuracy: " + monster.accuracy);
          
-         Fight.fight(monster.health, monster.damage, monster.accuracy);
+         Fight.fight(player, monster.health, monster.damage, monster.accuracy);
       }
    }
 }

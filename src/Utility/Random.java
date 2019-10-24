@@ -1,6 +1,6 @@
 package Utility;
 
-public class Utility {
+public class Random {
    public static int nextInt(int min, int max) {
       return (int)(Math.floor(Math.random() * (max - min)) + min);
    }

@@ -8,20 +8,24 @@ import Structures.Player;
 
 public class Game {
    @SuppressWarnings("resource")
-   public static void initiate() {
-      while (Player.health > 0) {
+   public void initiate(Player player) {
+      int health = player.getHealth();
+      
+      while (health > 0) {
          System.out.println("1. Adventure\t2. Bag\n3. Stats\t4. Exit");
 
          Scanner consoleChoice = new Scanner(System.in);
          String choice = consoleChoice.nextLine();
          
          if (choice.equals("1")) {
-            Adventure.explore();
+            Adventure adventure = new Adventure();
+            
+            adventure.explore(player);
          } else if (choice.equals("2")) {
             Bag.inBag();
          } else if (choice.equals("3")) {
-            System.out.println("Health: " + Player.health + "\nStrength: "
-                  + Player.strength + "\nDexterity: " + Player.dexterity);
+            System.out.println("Health: " + player.getHealth() + "\nStrength: "
+                  + player.getStrength() + "\nDexterity: " + player.getDexterity());
          } else if (choice.equals("4")) {
             System.out.println("Are you sure you'd like to close?\n1. Yes\t2. No");
             
