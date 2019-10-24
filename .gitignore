@@ -1,0 +1,7 @@
+# Packages
+bin/
+
+# Miscellaneous
+.settings/
+.classpath
+.project
