@@ -12,7 +12,7 @@ public class Weapons {
       
       if (directory != null) {
          for (File file : directory) {
-            weapons.add(file.)
+            //weapons.add(file.)
          }
       }
    }
