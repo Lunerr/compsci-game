@@ -7,7 +7,6 @@ import Actions.Bag;
 import Structures.Player;
 
 public class Game {
-   @SuppressWarnings("resource")
    public void initiate(Player player) {
       int health = player.getHealth();
       
@@ -17,12 +16,14 @@ public class Game {
          Scanner consoleChoice = new Scanner(System.in);
          String choice = consoleChoice.nextLine();
          
+         System.out.println("\n");
+         
          if (choice.equals("1")) {
             Adventure adventure = new Adventure();
             
             adventure.explore(player);
          } else if (choice.equals("2")) {
-            Bag.inBag();
+            Bag.displayBag(player, null);
          } else if (choice.equals("3")) {
             System.out.println("Health: " + player.getHealth() + "\nStrength: "
                   + player.getStrength() + "\nDexterity: " + player.getDexterity());
@@ -34,7 +35,11 @@ public class Game {
             
             if (exit.equals("1")) {
                exit();
+            } else if (!exit.equals("2")) {
+               System.out.println("Please choose a correct option.");
             }
+         } else {
+            System.out.println("Please choose a correct option.");
          }
          
          System.out.println("\n");
