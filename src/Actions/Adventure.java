@@ -43,5 +43,10 @@ public class Adventure {
       } else {
          System.out.println("You walked around and enjoyed nature :)");
       }
+      
+      int experience = Utility.Random.nextInt(1, 5);
+      player.setExperience(player.getExperience() + experience);
+      
+      System.out.println("Gained " + experience + " experience");
    }
 }

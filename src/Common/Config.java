@@ -16,6 +16,7 @@ import Weapons.M9Bayonet;
 public class Config {
    public static JSONArray weapons = new JSONArray();
    public static JSONArray food = new JSONArray();
+   public static JSONArray levels = new JSONArray();
    
    public static int weaponsOdds = 0;
    public static int foodOdds = 0;
@@ -34,6 +35,7 @@ public class Config {
    public static void initiate() {
       weaponsInitiate();
       foodInitiate();
+      levelsInitiate();
    }
    
    public static void weaponsInitiate() {
@@ -49,6 +51,37 @@ public class Config {
       food.add(addFood(bear_meat.name, bear_meat.type, bear_meat.health, bear_meat.odds));
       food.add(addFood(beef.name, beef.type, beef.health, beef.odds));
       food.add(addFood(chicken.name, chicken.type, chicken.health, chicken.odds));
+   }
+   
+   public static void levelsInitiate() {
+      int level = 2;
+      int xpNeeded = 0;
+      int strengthIncrease = 0;
+      int accuracyIncrease = 0;
+      int dexterityIncrease = 0;
+      
+      for (int i = 0; i < 15; i++) {
+         xpNeeded += Utility.Random.nextInt(10, 30);
+         strengthIncrease += Utility.Random.nextInt(5, 10);
+         accuracyIncrease += Utility.Random.nextInt(5, 10);
+         dexterityIncrease += Utility.Random.nextInt(5, 10);
+         
+         levels.add(addLevel(level, xpNeeded, strengthIncrease, accuracyIncrease, dexterityIncrease));
+         
+         level++;
+      }
+   }
+   
+   public static JSONObject addLevel(int levelNumber, int xpNeeded, int strengthIncrease, int accuracyIncrease, int dexterityIncrease) {
+      JSONObject level = new JSONObject();
+      
+      level.put("level", levelNumber);
+      level.put("xpNeeded", xpNeeded);
+      level.put("strengthIncrease", strengthIncrease);
+      level.put("accuracyIncrease", accuracyIncrease);
+      level.put("dexterityIncrease", dexterityIncrease);
+      
+      return level;
    }
 
    public static JSONObject addGun(String name, String type, int damage, int accuracy, int odds) {

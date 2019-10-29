@@ -4,6 +4,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Player {
+   private int level;
+   private int experience;
    private int health;
    private int strength;
    private int dexterity;
@@ -12,11 +14,21 @@ public class Player {
    private JSONObject active_weapon = new JSONObject();
    private JSONArray inventory = new JSONArray();
    
-   public Player(int health, int strength, int dexterity, int accuracy) {
+   public Player(int level, int experience, int health, int strength, int dexterity, int accuracy) {
+      this.level = level;
+      this.experience = experience;
       this.health = health;
       this.strength = strength;
       this.dexterity = dexterity;
       this.accuracy = accuracy;
+   }
+   
+   public void setLevel(int level) {
+      this.level = level;
+   }
+   
+   public void setExperience(int experience) {
+      this.experience = experience;
    }
    
    public void setHealth(int health) {
@@ -41,6 +53,14 @@ public class Player {
    
    public void setFight(boolean fight) {
       this.active_fight = fight;
+   }
+   
+   public int getLevel() {
+      return level;
+   }
+   
+   public int getExperience() {
+      return experience;
    }
    
    public int getHealth() {
