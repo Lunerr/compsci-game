@@ -11,40 +11,53 @@ import Structures.Player;
 
 public class Bag {
    public static void displayBag(Player player, Monster monster) {
-      JSONArray inventory = player.getInventory();
+      JSONArray weapons = player.getWeapons();
+      JSONArray food = player.getFood();
       
-      if (player.getWeapon().isEmpty()) {
-         System.out.println("You have no active weapon");
-      } else {
-         System.out.println("Active Weapon: " + player.getWeapon().get("name"));
-      }
-      
-      if (inventory.isEmpty()) {
+      if (weapons.isEmpty() && food.isEmpty()) {
          System.out.println("\nYou have nothing in your inventory.");
       } else {
-         String inv = "\nYour inventory contains:\n";
-         String weapons = "";
-         String food = "";
+         if (player.getWeapon().isEmpty() && weapons.isEmpty() == false) {
+            System.out.println("You have no active weapon");
+         } else {
+            System.out.println("Active Weapon: " + player.getWeapon().get("name"));
+         }
          
-         for (int i = 0; i < inventory.size(); i++) {
-            JSONObject item = (JSONObject)inventory.get(i);
-            String type = (String)item.get("type");
-            String name = (String)item.get("name");
+         String inv = "\nYour inventory contains:\n";
+         String weaponsString = "";
+         String foodString = "";
+         String addItem = "";
+         
+         if (weapons.isEmpty() == false) {
+            inv += "Weapons:\n";
             
-            String addItem = type.equals("Weapon") ? name + " with " + item.get("damage")
-                  + " damage and " + item.get("accuracy") + "% accuracy\n" : name
-                  + " with " + item.get("health") + " health regeneration\n";
+            for (int i = 0; i < weapons.size(); i++) {
+               JSONObject weapon = (JSONObject)weapons.get(i);
+               String name = (String)weapon.get("name");
+               
+               inv += name + ": " + weapon.get("damage") + " damage, " 
+                     + weapon.get("accuracy") + "% accuracy, " + weapon.get("durability") + " durability\n";
+               
+               weaponsString += i + 1 + ". " + name + "\t";
+            }
             
-            inv += addItem;
-
-            if (type.equals("Weapon")) {
-               weapons += i + 1 + ". " + name + " " + item.get("durability") + "%\t";
-            } else {
-               food += i + 1 + ". " + name + "\t";
+            inv += "\n";
+         }
+         
+         if (food.isEmpty() == false) {
+            inv += "Food:\n";
+            
+            for (int x = 0; x < food.size(); x++) {
+               JSONObject foodItem = (JSONObject)food.get(x);
+               String name = (String)foodItem.get("name");
+               
+               inv += name + ": " + foodItem.get("health") + " health regeneration\n";
+               
+               foodString += x + 1 + ". " + name + "\t";
             }
          }
          
-         System.out.println(inv.substring(0, inv.length() - 1) + ".");
+         System.out.println(inv);
          
          int options = 1;
          int weaponOption = 1;
@@ -73,22 +86,22 @@ public class Bag {
          int choice = consoleChoice.nextInt();
          
          if (choice == weaponOption && weapons.isEmpty() == false) {
-            System.out.println("Choose: " + weapons);
+            System.out.println("Choose: " + weaponsString);
             
             Scanner weaponChoice = new Scanner(System.in);
             
-            JSONObject weapon = (JSONObject)inventory.get(weaponChoice.nextInt() - 1);
+            JSONObject weapon = (JSONObject)weapons.get(weaponChoice.nextInt() - 1);
             
             player.setWeapon(weapon);
          } else if (choice == eatOption && food.isEmpty() == false) {
-            System.out.println("Choose: " + food);
+            System.out.println("Choose: " + foodString);
             
             Scanner foodChoice = new Scanner(System.in);
             
-            JSONObject foodItem = (JSONObject)inventory.get(foodChoice.nextInt() - 1);
+            JSONObject foodItem = (JSONObject)food.get(foodChoice.nextInt() - 1);
             
             player.modifyHealth((int)foodItem.get("health"));
-            player.removeItem(foodItem);
+            player.removeFood(foodItem);
             
             System.out.println("You ate a " + foodItem.get("name") + " for " + foodItem.get("health") + " health\n"
                   + "New Health: " + player.getHealth());

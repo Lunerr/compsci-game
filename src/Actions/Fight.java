@@ -50,7 +50,11 @@ public class Fight {
                if (!playerWeapon.isEmpty()) {
                   givenDamage += (int)playerWeapon.get("damage");
                   
-                  player.modifyDurability(playerWeapon, -2);
+                  JSONObject durability = player.modifyDurability(playerWeapon, -2);
+                  
+                  if (durability == null) {
+                     System.out.println("Your main weapon broke!");
+                  }
                }
                
                monster.health -= givenDamage;

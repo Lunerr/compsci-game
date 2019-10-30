@@ -74,5 +74,6 @@ public class GameService {
       player.setAccuracy(newAccuracy);
       player.setStrength(newStrength);
       player.setDexterity(newDexterity);
+      player.setLevel(player.getLevel() + 1);
    }
 }

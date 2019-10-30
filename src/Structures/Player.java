@@ -12,7 +12,8 @@ public class Player {
    private int accuracy;
    private boolean active_fight = false;
    private JSONObject active_weapon = new JSONObject();
-   private JSONArray inventory = new JSONArray();
+   private JSONArray weapons = new JSONArray();
+   private JSONArray food = new JSONArray();
    
    public Player(int level, int experience, int health, int strength, int dexterity, int accuracy) {
       this.level = level;
@@ -83,8 +84,12 @@ public class Player {
       return active_fight;
    }
    
-   public JSONArray getInventory() {
-      return inventory;
+   public JSONArray getWeapons() {
+      return weapons;
+   }
+   
+   public JSONArray getFood() {
+      return food;
    }
    
    public JSONObject getWeapon() {
@@ -100,28 +105,44 @@ public class Player {
    }
    
    public JSONObject modifyDurability(JSONObject item, int damage) {
-      JSONObject newItem = (JSONObject)inventory.get(inventory.indexOf(item));
+      JSONObject newItem = (JSONObject)weapons.get(weapons.indexOf(item));
       
-      inventory.remove(newItem);
+      weapons.remove(newItem);
       
-      int durability = (int)newItem.get("durability") - damage;
+      int durability = (int)newItem.get("durability") + damage;
       
       newItem.replace("durability", durability);
       
-      giveItem(newItem);
+      if (durability <= 0) {
+         return null;
+      }
+      
+      giveWeapon(newItem);
       
       return newItem;
    }
    
-   public JSONArray removeItem(JSONObject item) {
-      inventory.remove(item);
+   public JSONArray removeWeapon(JSONObject weapon) {
+      weapons.remove(weapon);
       
-      return inventory;
+      return weapons;
    }
    
-   public JSONArray giveItem(JSONObject item) {
-      inventory.add(item);
+   public JSONArray giveWeapon(JSONObject weapon) {
+      weapons.add(weapon);
       
-      return inventory;
+      return weapons;
+   }
+   
+   public JSONArray removeFood(JSONObject foodItem) {
+      food.remove(foodItem);
+      
+      return food;
+   }
+   
+   public JSONArray giveFood(JSONObject foodItem) {
+      food.add(foodItem);
+      
+      return food;
    }
 }

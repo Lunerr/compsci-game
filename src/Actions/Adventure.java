@@ -19,25 +19,25 @@ public class Adventure {
          
          player.setFight(true);
          fight.initiate(player, monster);
-      } else if (roll <= 70) {
+      } else if (roll <= 55) {
          JSONObject food = GameService.findFood();
          
          if (food == null) {
             System.out.println("ERROR: COULDNT FIND FOOD" + food);
          }
          
-         player.giveItem(food);
+         player.giveFood(food);
          
          System.out.println("You went searching " + (food.get("name").equals("Gapple (God Apple)") ? 
                "and found a " : "and hunted for ") + food.get("name") + "!");
-      } else if (roll <= 50) {
+      } else if (roll <= 75) {
          JSONObject weapon = GameService.findWeapon();
          
          if (weapon == null) {
             System.out.println("ERROR: COULDNT FIND WEAPON" + weapon);
          }
          
-         player.giveItem(weapon);
+         player.giveWeapon(weapon);
          
          System.out.println("You've found a " + weapon.get("name") + "!");
       } else {
